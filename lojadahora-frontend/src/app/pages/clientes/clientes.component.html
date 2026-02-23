@@ -1,0 +1,89 @@
+<div class="page-container">
+  <div class="page-header">
+    <div class="header-icon">👥</div>
+    <div>
+      <h1>Cadastro de Clientes</h1>
+      <p class="subtitle">Gerencie seus clientes com facilidade</p>
+    </div>
+  </div>
+
+  <!-- Mensagem de feedback -->
+  <div *ngIf="mensagem" class="alert" [class.alert-success]="!erro" [class.alert-error]="erro">
+    {{ mensagem }}
+  </div>
+
+  <!-- Formulário -->
+  <div class="card form-card">
+    <h2>{{ editandoId ? '✏️ Editar Cliente' : '➕ Novo Cliente' }}</h2>
+    <form (ngSubmit)="salvar()" #form="ngForm">
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="nome">Nome completo</label>
+          <input id="nome" type="text" [(ngModel)]="clienteForm.nome" name="nome"
+            placeholder="João Silva" required />
+        </div>
+        <div class="form-group">
+          <label for="cpf">CPF</label>
+          <input id="cpf" type="text" [(ngModel)]="clienteForm.cpf" name="cpf"
+            placeholder="000.000.000-00" required />
+        </div>
+        <div class="form-group">
+          <label for="email">E-mail</label>
+          <input id="email" type="email" [(ngModel)]="clienteForm.email" name="email"
+            placeholder="joao@email.com" required />
+        </div>
+        <div class="form-group">
+          <label for="telefone">Telefone</label>
+          <input id="telefone" type="text" [(ngModel)]="clienteForm.telefone" name="telefone"
+            placeholder="(11) 99999-9999" />
+        </div>
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary" [disabled]="!form.valid">
+          {{ editandoId ? 'Atualizar' : 'Cadastrar' }}
+        </button>
+        <button type="button" class="btn btn-secondary" *ngIf="editandoId" (click)="cancelarEdicao()">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Tabela de clientes -->
+  <div class="card table-card">
+    <h2>📋 Clientes Cadastrados</h2>
+
+    <div *ngIf="clientes.length === 0" class="empty-state">
+      <span class="empty-icon">🔍</span>
+      <p>Nenhum cliente cadastrado ainda.</p>
+    </div>
+
+    <div class="table-wrapper" *ngIf="clientes.length > 0">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>E-mail</th>
+            <th>Telefone</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cliente of clientes" [class.editing]="editandoId === cliente.id">
+            <td class="id-cell">{{ cliente.id }}</td>
+            <td><strong>{{ cliente.nome }}</strong></td>
+            <td>{{ cliente.cpf }}</td>
+            <td>{{ cliente.email }}</td>
+            <td>{{ cliente.telefone }}</td>
+            <td class="actions-cell">
+              <button class="btn-icon btn-edit" (click)="editar(cliente)" title="Editar">✏️</button>
+              <button class="btn-icon btn-delete" (click)="remover(cliente.id!)" title="Remover">🗑️</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

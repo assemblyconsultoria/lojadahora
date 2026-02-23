@@ -1,0 +1,35 @@
+<div class="layout">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="logo">
+      <span class="logo-icon">🛒</span>
+      <div>
+        <div class="logo-name">Loja da Hora</div>
+        <div class="logo-sub">Painel Administrativo</div>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <a routerLink="/clientes" routerLinkActive="active" class="nav-item">
+        <span class="nav-icon">👥</span>
+        <span>Clientes</span>
+      </a>
+      <a routerLink="/produtos" routerLinkActive="active" class="nav-item">
+        <span class="nav-icon">📦</span>
+        <span>Produtos</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="api-status">
+        <span class="status-dot"></span>
+        <span>API: localhost:8080</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main content -->
+  <main class="main">
+    <router-outlet />
+  </main>
+</div>

@@ -34,20 +34,22 @@ export class ClientesComponent implements OnInit {
 
     salvar(): void {
         if (this.editandoId !== null) {
-            this.clienteService.atualizar(this.editandoId, this.clienteForm).subscribe({
-                next: () => {
+            const id = this.editandoId;
+            this.clienteService.atualizar(id, this.clienteForm).subscribe({
+                next: (clienteAtualizado) => {
+                    const index = this.clientes.findIndex(c => c.id === id);
+                    if (index !== -1) this.clientes[index] = clienteAtualizado;
                     this.exibirMensagem('Cliente atualizado com sucesso!', false);
                     this.resetarFormulario();
-                    this.carregarClientes();
                 },
                 error: () => this.exibirMensagem('Erro ao atualizar cliente.', true)
             });
         } else {
             this.clienteService.adicionar(this.clienteForm).subscribe({
-                next: () => {
+                next: (clienteSalvo) => {
+                    this.clientes.push(clienteSalvo);
                     this.exibirMensagem('Cliente cadastrado com sucesso!', false);
                     this.resetarFormulario();
-                    this.carregarClientes();
                 },
                 error: () => this.exibirMensagem('Erro ao cadastrar cliente.', true)
             });
@@ -63,8 +65,8 @@ export class ClientesComponent implements OnInit {
         if (confirm('Deseja remover este cliente?')) {
             this.clienteService.remover(id).subscribe({
                 next: () => {
+                    this.clientes = this.clientes.filter(c => c.id !== id);
                     this.exibirMensagem('Cliente removido com sucesso!', false);
-                    this.carregarClientes();
                 },
                 error: () => this.exibirMensagem('Erro ao remover cliente.', true)
             });

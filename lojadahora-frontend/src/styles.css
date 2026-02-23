@@ -1,0 +1,55 @@
+/* ============================================
+   LOJA DA HORA — Estilos Globais
+   Design: Dark mode premium com roxo vibrante
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+/* Variáveis de design */
+:root {
+    --bg: #0f0f13;
+    --card-bg: #18181f;
+    --input-bg: #1e1e28;
+    --border: rgba(255, 255, 255, 0.08);
+    --accent: #8b5cf6;
+    --accent-2: #6366f1;
+    --text-primary: #f1f1f5;
+    --text-muted: #9ca3af;
+    --placeholder: #4b5563;
+    --row-hover: rgba(255, 255, 255, 0.03);
+    --sidebar-w: 240px;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Scrollbar custom */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent);
+}
